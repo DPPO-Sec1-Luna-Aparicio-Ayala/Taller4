@@ -6,7 +6,7 @@ import java.awt.*;
 import javax.swing.*;
 
 public class PanelTablero extends JPanel implements ActionListener,MouseMotionListener,MouseListener {
-	private BufferedImage Imagen_en_memoria;
+	/*private BufferedImage Imagen_en_memoria;
 	//imagen de fondo de cuadrados
 	private Image fondo = new ImageIcon(getClass().getResource("/images/default.jpg")).getImage();
 	private Casilla casilla = null;
@@ -38,14 +38,14 @@ public class PanelTablero extends JPanel implements ActionListener,MouseMotionLi
 		    addMouseListener(this);
 		}
 		 */
-	public void resize(){
+	/*public void resize(){
 		this.size = this.casilla.getSize();
 		this.setSize(size);
 		this.setPreferredSize(size);        
 		this.repaint();
 	}
 
-	public BufferedImage getDibujoFinal(){
+	/*public BufferedImage getDibujoFinal(){
 		return Imagen_en_memoria.getSubimage(0, 0, casilla.getSize().width, casilla.getSize().height);
 	}
 
@@ -64,7 +64,7 @@ public class PanelTablero extends JPanel implements ActionListener,MouseMotionLi
 		    /*pinta los objetos de la clase mitexto
 		    if( this.texto != null )
 		        this.texto.pintar_texto(g2Oculta);
-		    */
+		   
 
 		     g2.drawImage(Imagen_en_memoria, 0, 0, this);
 		     this.repaint();
@@ -98,11 +98,53 @@ public class PanelTablero extends JPanel implements ActionListener,MouseMotionLi
 		
 		add(lbRespuesta, BorderLayout.WEST);
 		add(txtRespuesta, BorderLayout.CENTER);
-		*/
-	}
+		
+	}*/
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}

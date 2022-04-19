@@ -37,10 +37,10 @@ public class interfazLightsOut  extends JFrame{
 		panelDerecha = new PanelDerecha();
 		
 		
-		panelTablero.setCasilla(casilla);
+		//panelTablero.setCasilla(casilla);
         this.repaint();
         casilla.setModel(modelo);
-        jList1.setModel(modelo);
+       // JList1.setModel(modelo);
 		setTitle( "LightsOut" );
 		setSize( 700, 700 );
 		setResizable( false );	

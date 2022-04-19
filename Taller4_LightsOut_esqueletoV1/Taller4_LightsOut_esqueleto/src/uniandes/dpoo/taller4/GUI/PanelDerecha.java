@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import uniandes.dpoo.taller4.modelo.Top10;
+
 public class PanelDerecha extends JPanel implements ActionListener{
 	
 	private JButton btnNuevo;
@@ -16,12 +18,13 @@ public class PanelDerecha extends JPanel implements ActionListener{
 	private JButton btnTop10;
 	private JButton btnCambiarJugador;
 
+
 	public PanelDerecha() {
 		
 		setPreferredSize(new Dimension(300, 200));
 		FlowLayout bl = new FlowLayout(100, 100, 100);
 		setLayout(bl);
-		
+		//lista = Top10.getTop10();
 		
 		btnNuevo = new JButton("Nuevo"); //Que hace?
 		//btnSuma.setActionCommand(SUMA);
@@ -32,7 +35,16 @@ public class PanelDerecha extends JPanel implements ActionListener{
 		//btnSuma.addActionListener(this);
 		
 		btnTop10 = new JButton("Top 10");
-		//btnSuma.setActionCommand(SUMA);
+		btnTop10.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				
+				
+		//		for(int i=0; i< lista.size(); i++) {
+          //  System.out.println(lista.get(i));
+        //}
+				
+			}
+		});
 		//btnSuma.addActionListener(this);
 		
 		btnCambiarJugador = new JButton("Cambiar Jugador");

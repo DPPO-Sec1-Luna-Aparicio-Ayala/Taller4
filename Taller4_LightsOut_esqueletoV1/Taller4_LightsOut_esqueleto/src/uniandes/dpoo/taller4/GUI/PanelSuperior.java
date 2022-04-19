@@ -14,7 +14,13 @@ public class PanelSuperior extends JPanel{
         combo1.addItem("6x6");
         combo1.addItem("7x7");
         add(combo1);
-        combo1.addItemListener(this);
+        //combo1.addActionListener((ActionListener) this);
 		}
+		
+		 public void itemStateChanged(ItemEvent e) {
+		       /*if (e.getSource()==combo1) {
+		            String seleccionado=(String)combo1.getSelectedItem();
+		     		        }*/
+		 }
 	
 }
