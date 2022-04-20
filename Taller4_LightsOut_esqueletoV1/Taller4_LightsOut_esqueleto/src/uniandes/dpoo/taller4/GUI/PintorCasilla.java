@@ -2,12 +2,12 @@ package uniandes.dpoo.taller4.GUI;
 import java.awt.*;
 import javax.swing.*;
 
-public class Casilla {
+public class PintorCasilla {
 	private Image foto;
     private Dimension size = new Dimension(1, 1);
     private DefaultListModel modelo;
     
-    public Casilla() {
+    public PintorCasilla() {
     	
     }
     

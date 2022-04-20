@@ -1,105 +1,54 @@
 package uniandes.dpoo.taller4.GUI;
 
 import java.awt.event.*;
+import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.awt.*;
 import javax.swing.*;
 
 public class PanelTablero extends JPanel implements ActionListener,MouseMotionListener,MouseListener {
 	/*private BufferedImage Imagen_en_memoria;
-	//imagen de fondo de cuadrados
-	private Image fondo = new ImageIcon(getClass().getResource("/images/default.jpg")).getImage();
-	private Casilla casilla = null;
-	//tamaño del contenedor
-	private Dimension size = new Dimension(100,100);
+	private Image fondo = new ImageIcon(getClass().getResource("/images/default.jpg")).getImage();*/
+	private PintorCasilla casilla = null;
+	private Dimension size = new Dimension(500,500);
+	private int numCasillas = 0;
+	private int ladoCasillas = 0;
+	private Image logo = null;
 	
-	public PanelTablero() {
-		setPreferredSize(new Dimension(500, 500));
-		GridLayout gl = new GridLayout(5,5);
-		setLayout(gl);
-		this.setSize( size );
+	public PanelTablero(int tamano, Image icono) {
+		this.setSize(size);
 		this.setVisible(true);
+		this.numCasillas = tamano*tamano;
+		this.ladoCasillas = tamano;
+		this.logo = icono;
 		addMouseMotionListener(this);
 		addMouseListener(this);
 	}
-
-	public void setCasilla(Casilla md){
-	    this.casilla = md;
-	    this.repaint();
-	}
-
-
-		/* constructor que toma el tamaño pasado como parametro
-		public mipanel(Dimension d){
-		    this.setPreferredSize( d );
-		    this.setSize( d );
-		    this.setVisible(true);
-		    addMouseMotionListener(this);
-		    addMouseListener(this);
-		}
-		 */
-	/*public void resize(){
-		this.size = this.casilla.getSize();
-		this.setSize(size);
-		this.setPreferredSize(size);        
-		this.repaint();
-	}
-
-	/*public BufferedImage getDibujoFinal(){
-		return Imagen_en_memoria.getSubimage(0, 0, casilla.getSize().width, casilla.getSize().height);
-	}
-
-		@Override
-		public void paintComponent(Graphics g) {
-		     Graphics2D g2 = (Graphics2D)g;
-		    //se crea una imagen en memoria
-		    BufferedImage imagenEnMemoria = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB); ;
-		    Graphics2D g2Oculta = imagenEnMemoria.createGraphics();
-		    g2Oculta.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		    //pinta imagen de fondo
-		    g2Oculta.drawImage(fondo, 0, 0, getWidth(), getHeight(), null);
-		    //pinta los objetos de clase midibujo
-		    if( this.casilla != null)
-		        this.casilla.pintar_dibujo(g2Oculta);
-		    /*pinta los objetos de la clase mitexto
-		    if( this.texto != null )
-		        this.texto.pintar_texto(g2Oculta);
-		   
-
-		     g2.drawImage(Imagen_en_memoria, 0, 0, this);
-		     this.repaint();
-		 }
-
-		public void mouseDragged(MouseEvent e) {       
-		    //se envian las nuevas coordenadas
-		    if( this.casilla != null)
-		        if( casilla.get_texto_seleccionado()!= -1 )
-		        	casilla.getTexto( casilla.get_texto_seleccionado() ).mover((int)e.getPoint().getX(),(int) e.getPoint().getY());
-		    this.repaint();        
-		}
-
-		public void mouseMoved(MouseEvent e) {}
-
-		public void mouseClicked(MouseEvent e) {}
-
-		public void mousePressed(MouseEvent e) {}
-
-		public void mouseReleased(MouseEvent e) {}
-	    public void mouseEntered(MouseEvent e) {}
-
-	    public void mouseExited(MouseEvent e) {}
-
+	
+	public void paint(Graphics g) {
+		super.paint(g);
+		Graphics2D g2d = (Graphics2D) g;
+		
+		int alto = size.height/ladoCasillas;
+		int ancho = size.width/ladoCasillas;
+		int n = 0;
+		int xaxis = 0;
+		int yaxis = 0;
+		while (n < numCasillas){
+		RoundRectangle2D.Double rectangle = new RoundRectangle2D.Double(xaxis,yaxis,alto,ancho,20,20);
+		g2d.draw(rectangle);
+		g2d.setPaint( new GradientPaint( xaxis, yaxis, Color.YELLOW, xaxis+ancho, yaxis+alto,Color.ORANGE ) );
+		g2d.fill(rectangle);
+		g2d.drawImage(logo,xaxis+15,yaxis+15,ancho-30,alto-30,this);
+		n++;
+		xaxis += ancho;
+		if (xaxis == size.width) {
+			yaxis += alto;
+			xaxis = 0;
 		}
 		
-		/*	
-		lbRespuesta = new JLabel("Rta");
-		txtRespuesta = new JTextField();
-		txtRespuesta.setEditable(false);
-		
-		add(lbRespuesta, BorderLayout.WEST);
-		add(txtRespuesta, BorderLayout.CENTER);
-		
-	}*/
+		}
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {

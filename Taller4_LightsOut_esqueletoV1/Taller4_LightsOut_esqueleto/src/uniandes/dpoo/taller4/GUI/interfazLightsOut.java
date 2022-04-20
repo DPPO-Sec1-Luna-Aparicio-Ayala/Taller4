@@ -1,6 +1,7 @@
 package uniandes.dpoo.taller4.GUI;
 
 import java.awt.BorderLayout;
+import java.awt.*;
 import java.io.File;
 
 import javax.swing.DefaultListModel;
@@ -18,32 +19,26 @@ public class interfazLightsOut  extends JFrame{
 	private PanelInferior panelInferior;
 	private PanelDerecha panelDerecha;
 	public int tamano;
-	//el objeto casjlla contiene la imagen
-    static Casilla casilla = new Casilla();   
-    //filtro para las imagenes
-    private FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivo de Imagen","jpg","png");
-    private JFileChooser fileChooser = new JFileChooser();
-    private File Directorio = fileChooser.getCurrentDirectory();
-    //para los datos que se extraen de Casilla.java
-    DefaultListModel modelo = new DefaultListModel();
 	
 	public interfazLightsOut() {
-		
-		
+		Toolkit pantalla = Toolkit.getDefaultToolkit();
+		Dimension tamanoPantalla = pantalla.getScreenSize();
+		int alturaPantalla = tamanoPantalla.height;
+		int anchoPantalla = tamanoPantalla.width;
+		Image icono = pantalla.getImage("src/uniandes/dpoo/taller4/graficos/bulb.png");
+		setIconImage(icono);
 		tab = new Tablero(tamano);
-		panelTablero = new PanelTablero();
+		panelTablero = new PanelTablero(5,icono);
 		panelSuperior = new PanelSuperior();
 		panelInferior = new PanelInferior();
 		panelDerecha = new PanelDerecha();
+	
 		
-		
-		//panelTablero.setCasilla(casilla);
-        this.repaint();
-        casilla.setModel(modelo);
-       // JList1.setModel(modelo);
 		setTitle( "LightsOut" );
-		setSize( 700, 700 );
+		setSize( 900, 700 );
+		//setExtendedState(Frame.MAXIMIZED_BOTH);
 		setResizable( false );	
+		//setIconImage();
 		setDefaultCloseOperation( EXIT_ON_CLOSE );
 		
 		add(panelSuperior, BorderLayout.NORTH);
