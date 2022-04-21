@@ -30,7 +30,7 @@ public class interfazLightsOut  extends JFrame{
 		setIconImage(icono);
 		tab = new Tablero(tamano);
 		//El tamaño por defecto del tablero es 4x4
-		panelTablero = new PanelTablero(icono, this, 4);
+		panelTablero = new PanelTablero(icono, this,4);
 		panelSuperior = new PanelSuperior(this);
 		panelInferior = new PanelInferior();
 		panelDerecha = new PanelDerecha();
