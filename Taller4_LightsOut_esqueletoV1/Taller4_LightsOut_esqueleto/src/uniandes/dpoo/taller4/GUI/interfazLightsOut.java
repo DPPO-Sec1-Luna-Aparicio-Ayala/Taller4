@@ -1,6 +1,7 @@
 package uniandes.dpoo.taller4.GUI;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionListener;
 import java.awt.*;
 import java.io.File;
 
@@ -23,20 +24,20 @@ public class interfazLightsOut  extends JFrame{
 	public interfazLightsOut() {
 		Toolkit pantalla = Toolkit.getDefaultToolkit();
 		Dimension tamanoPantalla = pantalla.getScreenSize();
-		int alturaPantalla = tamanoPantalla.height;
-		int anchoPantalla = tamanoPantalla.width;
+		//int alturaPantalla = tamanoPantalla.height;
+		//int anchoPantalla = tamanoPantalla.width;
 		Image icono = pantalla.getImage("src/uniandes/dpoo/taller4/graficos/bulb.png");
 		setIconImage(icono);
 		tab = new Tablero(tamano);
-		panelTablero = new PanelTablero(5,icono);
-		panelSuperior = new PanelSuperior();
+		//El tamaño por defecto del tablero es 4x4
+		panelTablero = new PanelTablero(icono, this, 4);
+		panelSuperior = new PanelSuperior(this);
 		panelInferior = new PanelInferior();
 		panelDerecha = new PanelDerecha();
 	
 		
 		setTitle( "LightsOut" );
 		setSize( 900, 700 );
-		//setExtendedState(Frame.MAXIMIZED_BOTH);
 		setResizable( false );	
 		//setIconImage();
 		setDefaultCloseOperation( EXIT_ON_CLOSE );
@@ -52,6 +53,14 @@ public class interfazLightsOut  extends JFrame{
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		new interfazLightsOut();
+	}
+	
+	public PanelTablero darPanelTablero() {
+		return this.panelTablero;
+	}
+	
+	public PanelSuperior darPanelSuperior() {
+		return this.panelSuperior;
 	}
 
 }
