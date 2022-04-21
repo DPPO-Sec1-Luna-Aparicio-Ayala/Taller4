@@ -33,7 +33,7 @@ public class interfazLightsOut  extends JFrame{
 		panelTablero = new PanelTablero(icono, this,4);
 		panelSuperior = new PanelSuperior(this);
 		panelInferior = new PanelInferior();
-		panelDerecha = new PanelDerecha();
+		panelDerecha = new PanelDerecha(this);
 	
 		
 		setTitle( "LightsOut" );
@@ -61,6 +61,10 @@ public class interfazLightsOut  extends JFrame{
 	
 	public PanelSuperior darPanelSuperior() {
 		return this.panelSuperior;
+	}
+	
+	public void reinit() {
+			tab.reiniciar();
 	}
 
 }

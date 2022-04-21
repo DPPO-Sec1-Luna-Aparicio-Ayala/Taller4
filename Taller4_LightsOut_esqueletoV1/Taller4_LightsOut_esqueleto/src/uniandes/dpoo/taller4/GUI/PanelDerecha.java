@@ -19,7 +19,7 @@ public class PanelDerecha extends JPanel implements ActionListener{
 	private JButton btnCambiarJugador;
 
 
-	public PanelDerecha() {
+	public PanelDerecha(interfazLightsOut interfaz) {
 		
 		setPreferredSize(new Dimension(300, 200));
 		FlowLayout bl = new FlowLayout(100, 100, 100);
@@ -33,6 +33,13 @@ public class PanelDerecha extends JPanel implements ActionListener{
 		btnReiniciar = new JButton("Reiniciar");
 		//btnSuma.setActionCommand(SUMA);
 		//btnSuma.addActionListener(this);
+		btnReiniciar.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				
+	
+				
+			}
+		});
 		
 		btnTop10 = new JButton("Top 10");
 		btnTop10.addActionListener(new ActionListener(){
@@ -63,6 +70,8 @@ public class PanelDerecha extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		
+		
 		
 	}
 }
