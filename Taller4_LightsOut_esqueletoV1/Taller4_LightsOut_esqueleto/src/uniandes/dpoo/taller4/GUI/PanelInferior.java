@@ -13,7 +13,7 @@ public class PanelInferior extends JPanel{
     private JLabel labJugadas;
     private JLabel labJugadasContadas;
     
-    public PanelInferior(){
+    public PanelInferior(interfazLightsOut interfaz){
 
         setPreferredSize(new Dimension(700, 100));
         FlowLayout fl = new FlowLayout();
@@ -23,7 +23,7 @@ public class PanelInferior extends JPanel{
         labJugadorActual = new JLabel(""); //funcion llenar con nombre
         labJugadas = new JLabel("Jugadas: ");
         labJugadasContadas = new JLabel(""); //funcion contar juagadas
-
+        labJugadasContadas.addActionListener(interfaz.darPanelTablero());
         add(labJugador);
         add(labJugadorActual);
         add(labJugadas);

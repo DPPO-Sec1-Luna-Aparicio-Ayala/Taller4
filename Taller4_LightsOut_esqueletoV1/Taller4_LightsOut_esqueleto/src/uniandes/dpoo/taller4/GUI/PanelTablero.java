@@ -20,6 +20,7 @@ public class PanelTablero extends JPanel implements ActionListener,MouseMotionLi
 		this.ladoCasillas = tamano;
 		this.logo = icono;
 		this.interfaz = interf;
+		
 		//addMouseMotionListener(this);
 		//addMouseListener(this);
 	}
