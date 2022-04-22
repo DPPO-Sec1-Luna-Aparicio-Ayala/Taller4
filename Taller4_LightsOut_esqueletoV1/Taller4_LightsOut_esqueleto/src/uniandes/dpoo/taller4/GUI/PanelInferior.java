@@ -2,11 +2,13 @@ package uniandes.dpoo.taller4.GUI;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class PanelInferior extends JPanel{
+public class PanelInferior extends JPanel implements ActionListener{
     
     private JLabel labJugador;
     private JLabel labJugadorActual;
@@ -23,12 +25,22 @@ public class PanelInferior extends JPanel{
         labJugadorActual = new JLabel(""); //funcion llenar con nombre
         labJugadas = new JLabel("Jugadas: ");
         labJugadasContadas = new JLabel(""); //funcion contar juagadas
-        labJugadasContadas.addActionListener(interfaz.darPanelTablero());
+        
         add(labJugador);
         add(labJugadorActual);
         add(labJugadas);
         add(labJugadasContadas);
+        
+       
 
 
     }
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 }
