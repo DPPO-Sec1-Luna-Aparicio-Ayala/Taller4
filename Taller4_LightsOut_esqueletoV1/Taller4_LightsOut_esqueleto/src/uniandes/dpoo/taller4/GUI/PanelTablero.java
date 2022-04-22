@@ -5,40 +5,54 @@ import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.awt.*;
 import javax.swing.*;
+import uniandes.dpoo.taller4.modelo.*;
 
 //Para que pueda cambiar dependiendo de un evento, debe ser un ActionListener
 public class PanelTablero extends JPanel implements ActionListener,MouseMotionListener,MouseListener {
-	private PintorCasilla casilla = null;
+	private int tamanoCasilla = 0;
 	private Dimension size = new Dimension(500,500);
 	private int ladoCasillas = 0;
 	private Image logo = null;
 	private interfazLightsOut interfaz = null;
+	private Tablero tablero = null;
+	private boolean[][] matriz = null;
 	
 	public PanelTablero(Image icono, interfazLightsOut interf, int tamano) {
 		this.setSize(size);
 		this.setVisible(true);
 		this.ladoCasillas = tamano;
+		this.tamanoCasilla = size.height/tamano;
 		this.logo = icono;
 		this.interfaz = interf;
+		this.tablero = interf.darTablero();
+		this.matriz = interf.darTablero().darTablero();
 		
 		//addMouseMotionListener(this);
-		//addMouseListener(this);
+		addMouseListener(this);
 	}
 	
 	public void paint(Graphics g) {
 			super.paint(g);
 			Graphics2D g2d = (Graphics2D) g;
-			
+						
 			int alto = size.height/ladoCasillas;
 			int ancho = size.width/ladoCasillas;
 			int fila = 1;
 			int columna = 1;
 			int xaxis = 0;
 			int yaxis = 0;
+			
+			
 			while (columna <= ladoCasillas && fila <= ladoCasillas){
+				boolean encendido = matriz[fila-1][columna-1];
 				RoundRectangle2D.Double rectangle = new RoundRectangle2D.Double(xaxis,yaxis,alto,ancho,20,20);
 				g2d.draw(rectangle);
-				g2d.setPaint( new GradientPaint( xaxis, yaxis, Color.YELLOW, xaxis+ancho, yaxis+alto,Color.ORANGE ) );
+				if (encendido) {
+					g2d.setPaint( new GradientPaint( xaxis, yaxis, Color.YELLOW, xaxis+ancho, yaxis+alto,Color.ORANGE ) );
+				}
+				else if (encendido == false) {
+					g2d.setPaint( new GradientPaint( xaxis, yaxis, Color.GRAY, xaxis+ancho, yaxis+alto,Color.BLACK ) );
+				}
 				g2d.fill(rectangle);
 				g2d.drawImage(logo,xaxis+15,yaxis+15,ancho-30,alto-30,this);
 				xaxis += ancho;
@@ -54,11 +68,36 @@ public class PanelTablero extends JPanel implements ActionListener,MouseMotionLi
 	
 	//Actualiza el número de casillas y re pinta el tablero
 	public void actualizarTamanoTablero(int n) {
+		interfaz.setTablero(new Tablero(n));
+		interfaz.setTamano(n);
+		
 		this.ladoCasillas = n;
-		repaint();
+		this.tamanoCasilla = size.height/n;
+		
+		actualizarTablero();
 		
 	}
+	
+	public void pintarCasilla(int X, int Y) {
+			int fila = (Y / tamanoCasilla)+1;
+			int columna = (X / tamanoCasilla)+1;			
+			System.out.println("La fila seleccionada fue "+fila);
+			System.out.println("La columna seleccionada fue "+ columna);
+			tablero.jugar(fila, columna);
+			interfaz.setTablero(tablero);
+			actualizarTablero();
+	}
 
+	public void actualizarTablero() {
+		this.tablero = interfaz.darTablero();
+		this.matriz = interfaz.darTablero().darTablero();
+		repaint();
+	}
+	
+	
+	
+	//ACTIONS
+	
 	//Cuando reciba o "escuche" un evento (en este caso, proviene de la caja del panel superior) va a hacer lo que diga dentro del método
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -85,8 +124,13 @@ public class PanelTablero extends JPanel implements ActionListener,MouseMotionLi
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
+		int coordX = e.getX();
+		int coordY = e.getY();
+		
+		pintarCasilla(coordX, coordY);
 		
 	}
+
 
 	@Override
 	public void mousePressed(MouseEvent e) {
@@ -123,5 +167,4 @@ public class PanelTablero extends JPanel implements ActionListener,MouseMotionLi
 		// TODO Auto-generated method stub
 		
 	}
-
 }

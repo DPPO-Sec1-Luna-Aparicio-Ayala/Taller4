@@ -1,6 +1,7 @@
 package uniandes.dpoo.taller4.GUI;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.*;
 import java.io.File;
@@ -12,34 +13,29 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import uniandes.dpoo.taller4.modelo.Tablero;
 
-public class interfazLightsOut  extends JFrame{
+public class interfazLightsOut  extends JFrame implements ActionListener{
 
-	private Tablero tab;
+	private Tablero tablero;
 	private PanelTablero panelTablero;
 	private PanelSuperior panelSuperior;
 	private PanelInferior panelInferior;
 	private PanelDerecha panelDerecha;
-	public int tamano;
+	public int tamano = 4;
+	//El tamaño por defecto del tablero es 4x4
 	
 	public interfazLightsOut() {
 		Toolkit pantalla = Toolkit.getDefaultToolkit();
-		Dimension tamanoPantalla = pantalla.getScreenSize();
-		//int alturaPantalla = tamanoPantalla.height;
-		//int anchoPantalla = tamanoPantalla.width;
 		Image icono = pantalla.getImage("src/uniandes/dpoo/taller4/graficos/bulb.png");
 		setIconImage(icono);
-		tab = new Tablero(tamano);
-		//El tamaño por defecto del tablero es 4x4
-		panelTablero = new PanelTablero(icono, this,4);
+		tablero = new Tablero(tamano);
+		panelTablero = new PanelTablero(icono, this,tamano);
 		panelSuperior = new PanelSuperior(this);
 		panelInferior = new PanelInferior(this);
 		panelDerecha = new PanelDerecha(this);
-	
 		
 		setTitle( "LightsOut" );
 		setSize( 900, 700 );
 		setResizable( false );	
-		//setIconImage();
 		setDefaultCloseOperation( EXIT_ON_CLOSE );
 		
 		add(panelSuperior, BorderLayout.NORTH);
@@ -52,8 +48,18 @@ public class interfazLightsOut  extends JFrame{
 	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		new interfazLightsOut();
+	}
+		
+	public void reinit() {
+			tablero.reiniciar();
+			panelTablero.actualizarTablero();
+	}
+	
+	//GETTERS
+	
+	public Tablero darTablero() {
+		return this.tablero;
 	}
 	
 	public PanelTablero darPanelTablero() {
@@ -64,8 +70,21 @@ public class interfazLightsOut  extends JFrame{
 		return this.panelSuperior;
 	}
 	
-	public void reinit() {
-			tab.reiniciar();
+	
+	//SETTERS
+	public void setTablero(Tablero newTab) {
+		tablero = newTab;
+	}
+	
+	public void setTamano(int n) {
+		tamano = n;
+	}
+	
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		reinit();
+		
 	}
 
 }
