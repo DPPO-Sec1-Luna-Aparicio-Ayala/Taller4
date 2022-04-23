@@ -3,6 +3,8 @@ package uniandes.dpoo.taller4.GUI;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.*;
 import java.io.File;
 
@@ -26,9 +28,10 @@ public class interfazLightsOut  extends JFrame implements ActionListener{
 	public interfazLightsOut() {
 		Toolkit pantalla = Toolkit.getDefaultToolkit();
 		Image icono = pantalla.getImage("src/uniandes/dpoo/taller4/graficos/bulb.png");
+		Image apagado = pantalla.getImage("src/uniandes/dpoo/taller4/graficos/bulbOff.png");
 		setIconImage(icono);
 		tablero = new Tablero(tamano);
-		panelTablero = new PanelTablero(icono, this,tamano);
+		panelTablero = new PanelTablero(icono, this,tamano,apagado);
 		panelSuperior = new PanelSuperior(this);
 		panelInferior = new PanelInferior(this);
 		panelDerecha = new PanelDerecha(this);
@@ -43,6 +46,16 @@ public class interfazLightsOut  extends JFrame implements ActionListener{
 		add(panelTablero, BorderLayout.CENTER);
 		add(panelDerecha, BorderLayout.EAST);
 		
+		/*
+		// Esto se usa para que al cerrar la ventana se salven los resultados
+		addWindowListener(new WindowAdapter()
+		{
+			public void windowClosing(WindowEvent e)
+			{
+			salvarTop10();
+			}
+		});
+		*/
 		setVisible(true);
 		
 	}

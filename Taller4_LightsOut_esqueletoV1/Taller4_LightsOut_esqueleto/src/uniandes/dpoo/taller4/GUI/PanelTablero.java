@@ -12,17 +12,19 @@ public class PanelTablero extends JPanel implements ActionListener,MouseMotionLi
 	private int tamanoCasilla = 0;
 	private Dimension size = new Dimension(500,500);
 	private int ladoCasillas = 0;
-	private Image logo = null;
+	private Image on = null;
+	private Image off = null;
 	private interfazLightsOut interfaz = null;
 	private Tablero tablero = null;
 	private boolean[][] matriz = null;
 	
-	public PanelTablero(Image icono, interfazLightsOut interf, int tamano) {
+	public PanelTablero(Image encendido, interfazLightsOut interf, int tamano, Image apagado) {
 		this.setSize(size);
 		this.setVisible(true);
 		this.ladoCasillas = tamano;
 		this.tamanoCasilla = size.height/tamano;
-		this.logo = icono;
+		this.on = encendido;
+		this.off = apagado;
 		this.interfaz = interf;
 		this.tablero = interf.darTablero();
 		this.matriz = interf.darTablero().darTablero();
@@ -54,7 +56,13 @@ public class PanelTablero extends JPanel implements ActionListener,MouseMotionLi
 					g2d.setPaint( new GradientPaint( xaxis, yaxis, Color.GRAY, xaxis+ancho, yaxis+alto,Color.BLACK ) );
 				}
 				g2d.fill(rectangle);
-				g2d.drawImage(logo,xaxis+15,yaxis+15,ancho-30,alto-30,this);
+				
+				if (encendido) {
+					g2d.drawImage(on,xaxis+15,yaxis+15,ancho-30,alto-30,this);
+				}
+				else if (encendido == false) {
+					g2d.drawImage(off,xaxis+15,yaxis+15,ancho-30,alto-30,this);
+				}
 				xaxis += ancho;
 				if (columna == ladoCasillas) {
 					yaxis += alto;
@@ -67,7 +75,7 @@ public class PanelTablero extends JPanel implements ActionListener,MouseMotionLi
 		}
 	
 	//Actualiza el número de casillas y re pinta el tablero
-	public void actualizarTamanoTablero(int n) {
+	private void actualizarTamanoTablero(int n) {
 		interfaz.setTablero(new Tablero(n));
 		interfaz.setTamano(n);
 		
@@ -78,17 +86,20 @@ public class PanelTablero extends JPanel implements ActionListener,MouseMotionLi
 		
 	}
 	
-	public void pintarCasilla(int X, int Y) {
-			int fila = (Y / tamanoCasilla)+1;
-			int columna = (X / tamanoCasilla)+1;			
-			System.out.println("La fila seleccionada fue "+fila);
-			System.out.println("La columna seleccionada fue "+ columna);
+	private void pintarCasilla(int fila, int columna) {
 			tablero.jugar(fila, columna);
 			interfaz.setTablero(tablero);
 			actualizarTablero();
 	}
+	
+	private int[] hallarCasilla(int X, int Y) {
+		int fila = (Y / tamanoCasilla);
+		int columna = (X / tamanoCasilla);
+		int[] casilla = {fila,columna};
+		return casilla;
+	}
 
-	public void actualizarTablero() {
+	private void actualizarTablero() {
 		this.tablero = interfaz.darTablero();
 		this.matriz = interfaz.darTablero().darTablero();
 		repaint();
@@ -126,8 +137,8 @@ public class PanelTablero extends JPanel implements ActionListener,MouseMotionLi
 		// TODO Auto-generated method stub
 		int coordX = e.getX();
 		int coordY = e.getY();
-		
-		pintarCasilla(coordX, coordY);
+		int[] casilla = hallarCasilla(coordX,coordY);
+		pintarCasilla(casilla[0], casilla[1]);
 		
 	}
 
