@@ -25,26 +25,29 @@ public class PanelSuperior extends JPanel{
         combo1.addItem("7x7");
        
         
-        dificultad_facil = new JRadioButton("Fácil");
-		dificultad_medio = new JRadioButton("Medio");
-		dificultad_dificil = new JRadioButton("Dificíl");
+        setDificultad_facil(new JRadioButton("Fácil"));
+		setDificultad_medio(new JRadioButton("Medio"));
+		setDificultad_dificil(new JRadioButton("Dificíl"));
 		ButtonGroup grupo_botones = new ButtonGroup();
-		grupo_botones.add(dificultad_dificil);
-		grupo_botones.add(dificultad_medio);
-		grupo_botones.add(dificultad_facil);
+		grupo_botones.add(getDificultad_dificil());
+		grupo_botones.add(getDificultad_medio());
+		grupo_botones.add(getDificultad_facil());
 		txt_dificultad = new JLabel("Dificultad: ");
 		txt_tamanio = new JLabel("Tamaño: ");
 		
 		add(txt_tamanio);
-		 add(combo1);
+		add(combo1);
 		add(txt_dificultad);
-		add(dificultad_facil);
-		add(dificultad_medio);
-		add(dificultad_dificil);
+		add(getDificultad_facil());
+		add(getDificultad_medio());
+		add(getDificultad_dificil());
         
         /*Hace que el PanelTablero sea un ActionListener del ComboBox, es decir, cuando un evento suceda en combo1, esto podrá afectar al 
         PanelTablero*/
         combo1.addActionListener(interfaz.darPanelTablero());
+        getDificultad_facil().addActionListener(interfaz);
+        getDificultad_medio().addActionListener(interfaz);
+        getDificultad_dificil().addActionListener(interfaz);
 		}
 		
 		 public void itemStateChanged(ItemEvent e) {
@@ -56,6 +59,30 @@ public class PanelSuperior extends JPanel{
 		 public String obtenerTamanoTablero() {
 			 return combo1.getSelectedItem().toString();
 		 }
+
+		public JRadioButton getDificultad_facil() {
+			return dificultad_facil;
+		}
+
+		public void setDificultad_facil(JRadioButton dificultad_facil) {
+			this.dificultad_facil = dificultad_facil;
+		}
+
+		public JRadioButton getDificultad_medio() {
+			return dificultad_medio;
+		}
+
+		public void setDificultad_medio(JRadioButton dificultad_medio) {
+			this.dificultad_medio = dificultad_medio;
+		}
+
+		public JRadioButton getDificultad_dificil() {
+			return dificultad_dificil;
+		}
+
+		public void setDificultad_dificil(JRadioButton dificultad_dificil) {
+			this.dificultad_dificil = dificultad_dificil;
+		}
 		 
 	
 }

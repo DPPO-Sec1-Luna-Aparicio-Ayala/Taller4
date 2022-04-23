@@ -13,7 +13,7 @@ import uniandes.dpoo.taller4.modelo.Top10;
 
 public class PanelDerecha extends JPanel implements ActionListener{
 	
-	private JButton btnNuevo;
+	private JButton btnNuevoJuego;
 	private JButton btnReiniciar;
 	private JButton btnTop10;
 	private JButton btnCambiarJugador;
@@ -26,40 +26,23 @@ public class PanelDerecha extends JPanel implements ActionListener{
 		setPreferredSize(new Dimension(300, 200));
 		FlowLayout bl = new FlowLayout(100, 100, 100);
 		setLayout(bl);
-		//lista = Top10.getTop10();
-		
-		btnNuevo = new JButton("Nuevo"); //Que hace?
-		//btnSuma.setActionCommand(SUMA);
-		//btnSuma.addActionListener(this);
+
+		btnNuevoJuego = new JButton("Nuevo Juego");
+		btnNuevoJuego.addActionListener(interfaz);
 		
 		btnReiniciar = new JButton("Reiniciar");
-		//btnSuma.setActionCommand(SUMA);
-		//btnSuma.addActionListener(this);
 		btnReiniciar.addActionListener(interfaz);
-		
+			
 		btnTop10 = new JButton("Top 10");
-		btnTop10.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e) {
-				
-				
-		//		for(int i=0; i< lista.size(); i++) {
-          //  System.out.println(lista.get(i));
-        //}
-				
-			}
-		});
-		//btnSuma.addActionListener(this);
+		btnTop10.addActionListener(interfaz);
 		
 		btnCambiarJugador = new JButton("Cambiar Jugador");
-		//btnSuma.setActionCommand(SUMA);
-		//btnSuma.addActionListener(this);
-		
-		
-		//add(btnNuevo, BorderLayout.WEST);
+		btnCambiarJugador.addActionListener(interfaz);
+
+		add(btnNuevoJuego);
 		add(btnReiniciar);
-		add(btnTop10);
 		add(btnCambiarJugador);
-		add(btnNuevo);
+		add(btnTop10);
 		
 	}
 
@@ -69,5 +52,33 @@ public class PanelDerecha extends JPanel implements ActionListener{
 		
 		
 		
+	}
+
+	public JButton getBtnReiniciar() {
+		return btnReiniciar;
+	}
+
+	public void setBtnReiniciar(JButton btnReiniciar) {
+		this.btnReiniciar = btnReiniciar;
+	}
+
+	public JButton getBtnNuevoJuego() {
+		return btnNuevoJuego;
+	}
+
+	public void setBtnNuevoJuego(JButton btnNuevoJuego) {
+		this.btnNuevoJuego = btnNuevoJuego;
+	}
+	
+	public JButton getBtnCambiarJugador() {
+		return btnCambiarJugador;
+	}
+
+	public void setBtnCambiarJugador(JButton btnCambiarJugador) {
+		this.btnCambiarJugador = btnCambiarJugador;
+	}
+	
+	public JButton getBtnTop10() {
+		return btnTop10;
 	}
 }

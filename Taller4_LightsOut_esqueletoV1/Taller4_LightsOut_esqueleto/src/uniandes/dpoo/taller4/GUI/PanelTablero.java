@@ -89,7 +89,10 @@ public class PanelTablero extends JPanel implements ActionListener,MouseMotionLi
 	private void pintarCasilla(int fila, int columna) {
 			tablero.jugar(fila, columna);
 			interfaz.setTablero(tablero);
+			interfaz.actualizarJugadas();
 			actualizarTablero();
+			interfaz.gano();
+			
 	}
 	
 	private int[] hallarCasilla(int X, int Y) {
@@ -99,7 +102,7 @@ public class PanelTablero extends JPanel implements ActionListener,MouseMotionLi
 		return casilla;
 	}
 
-	private void actualizarTablero() {
+	public void actualizarTablero() {
 		this.tablero = interfaz.darTablero();
 		this.matriz = interfaz.darTablero().darTablero();
 		repaint();
@@ -137,9 +140,11 @@ public class PanelTablero extends JPanel implements ActionListener,MouseMotionLi
 		// TODO Auto-generated method stub
 		int coordX = e.getX();
 		int coordY = e.getY();
-		int[] casilla = hallarCasilla(coordX,coordY);
-		pintarCasilla(casilla[0], casilla[1]);
-		
+		if (coordX <= tamanoCasilla*ladoCasillas && coordY <= tamanoCasilla*ladoCasillas) {
+			int[] casilla = hallarCasilla(coordX,coordY);
+			pintarCasilla(casilla[0], casilla[1]);
+						
+		}
 	}
 
 
